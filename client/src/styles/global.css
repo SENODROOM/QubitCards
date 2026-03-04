@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* ── CSS Variables ──────────────────────────────────── */
+:root {
+  --primary: #6C63FF;
+  --primary-light: #9C6FFF;
+  --primary-dark: #4A3ADB;
+  --primary-bg: #EDE9FF;
+  --secondary: #FF6584;
+  --secondary-bg: #FFE4EC;
+  --teal: #26C6DA;
+  --green: #66BB6A;
+  --green-bg: #E8F5E9;
+  --amber: #FFCA28;
+  --surface: #F8F4FF;
+  --card: #FFFFFF;
+  --border: #E8E0FF;
+  --text: #1A1A2E;
+  --text-muted: #7B7497;
+  --text-light: #B0A8C8;
+  --shadow-sm: 0 2px 8px rgba(108,99,255,0.08);
+  --shadow-md: 0 4px 20px rgba(108,99,255,0.15);
+  --shadow-lg: 0 8px 40px rgba(108,99,255,0.20);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  --gradient-coral: linear-gradient(135deg, #FF6584, #FF8FAB);
+  --font-main: 'Nunito', sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+  --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ── Reset ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-main);
+  background: var(--surface);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary-light); }
+
+/* ── Typography ─────────────────────────────────────── */
+h1, h2, h3, h4, h5 { font-family: var(--font-display); font-weight: 700; line-height: 1.2; }
+
+/* ── Utilities ──────────────────────────────────────── */
+.gradient-text {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Flip Card ──────────────────────────────────────── */
+.flip-container { perspective: 1200px; }
+.flip-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+.flip-inner.flipped { transform: rotateY(180deg); }
+.flip-front, .flip-back {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-lg);
+}
+.flip-back { transform: rotateY(180deg); }
+
+/* ── Animations ─────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.fade-in-up { animation: fadeInUp 0.4s ease forwards; }
+.fade-in { animation: fadeIn 0.3s ease forwards; }
+
+/* ── Loading Skeleton ────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #f0ebff 25%, #e0d9ff 50%, #f0ebff 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Spinner ─────────────────────────────────────────── */
+.spinner {
+  width: 40px; height: 40px;
+  border: 3px solid var(--primary-bg);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
